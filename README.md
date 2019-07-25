@@ -2,7 +2,10 @@
 
 En ocasiones cuando comprometemos un servidor web, hay reglas configuradas (**Ej: iptables**) que nos impiden obtener una Reverse Shell vía Netcat, Python, u otra utilidad.
 
-Con esta herramienta, evitamos tener que hacer uso de una reverse shell para obtener una TTY posteriormente completamente interactiva. A través de archivos 'mkfifo', jugamos para simular una TTY interactiva sobre HTTP, logrando manejarnos sobre el sistema cómodamente sin ningún problema.
+Con esta herramienta, evitamos tener que hacer uso de una reverse shell para
+obtener una TTY posteriormente completamente interactiva. A través de archivos
+'**mkfifo**', jugamos para simular una TTY interactiva sobre HTTP, logrando
+manejarnos sobre el sistema cómodamente sin ningún tipo de problema.
 
 Lo único que necesitamos, es subir al servidor comprometido una estructura PHP como la siguiente para ejecutar comandos:
 
@@ -16,5 +19,5 @@ Una vez subido, simplemente ejecutamos el script (Es necesario cambiar la ruta e
 
 Tras su ejecución, se muestra un ejemplo de su utilidad:
 
-![OSCP Image](https://funkyimg.com/i/2VKJr.png)
+<div style="text-align:center"><img src="https://funkyimg.com/i/2VKJz.png" /></div>
 
