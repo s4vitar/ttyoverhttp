@@ -19,5 +19,5 @@ Una vez subido, simplemente ejecutamos el script (Es necesario cambiar la ruta e
 
 Tras su ejecución, se muestra un ejemplo de su utilidad:
 
-<div style="text-align:center"><img src="https://funkyimg.com/i/2VKJz.png" /></div>
+<div style="text-align:center"><img src="https://i.imgur.com/jxkqpI3.png"/></div>
 

